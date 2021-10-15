@@ -1,6 +1,4 @@
-// TODO: argumento para milisegundos ou segundos
-
-export function logarTempoExecucao() {
+export function logarTempoExecucao(emSegundos: boolean = false) {
   return function (
     target: any,
     propertyKey: string,
@@ -11,9 +9,16 @@ export function logarTempoExecucao() {
       const t1 = performance.now();
       const result = originalMethod.apply(this, args);
       const t2 = performance.now();
-      console.log(
-        `${propertyKey}, teve tempo de execução ${(t2 - t1) / 1000} segundos.`
-      );
+      if (emSegundos) {
+        console.log(
+          `${propertyKey}, teve tempo de execução ${(t2 - t1) / 1000} segundos.`
+        );
+      } else {
+        console.log(
+          `${propertyKey}, teve tempo de execução ${t2 - t1} milissegundos.`
+        );
+      }
+
       return result;
     };
 
