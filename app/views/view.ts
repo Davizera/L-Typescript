@@ -5,9 +5,9 @@ export abstract class View<T> {
     this._element = document.querySelector(selector);
   }
 
-  abstract template(model: T): string;
+  protected abstract template(model: T): string;
 
-  update(model: T): void {
+  public update(model: T): void {
     this._element.innerHTML = this.template(model);
   }
 }
