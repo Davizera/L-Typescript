@@ -9,18 +9,24 @@ export class NegociacaoController {
   private _quantidade: HTMLInputElement;
   private _valor: HTMLInputElement;
   private _negociacoes = new Negociacoes();
-  private _negociacoesView = new NegociacaoView("#table-negociacao");
+  private _negociacoesView = new NegociacaoView("#table-negociacao", true);
   private _view = new MessageView("#mensagemView");
 
   constructor() {
-    this._data = document.querySelector("#data");
-    this._quantidade = document.querySelector("#quantidade");
-    this._valor = document.querySelector("#valor");
+    this._data = document.querySelector("#data") as HTMLInputElement;
+    this._quantidade = document.querySelector(
+      "#quantidade"
+    ) as HTMLInputElement;
+    this._valor = document.querySelector("#valor") as HTMLInputElement;
     this._negociacoesView.update(this._negociacoes);
   }
 
   public adiciona(): void {
-    const negociacao = this.criaNegociacao();
+    const negociacao = Negociacao.criaDe(
+      this._data.value,
+      this._quantidade.value,
+      this._valor.value
+    );
 
     if (!this._ehDiaUtil(negociacao.data)) {
       this._view.update("Só é possível adicionar negociações em dias úteis.");
@@ -31,6 +37,7 @@ export class NegociacaoController {
     this.limpaFormulario();
     this._updateAllView();
   }
+
   private _ehDiaUtil(data: Date) {
     return (
       data.getDay() > DiasDaSemana.DOMINGO &&

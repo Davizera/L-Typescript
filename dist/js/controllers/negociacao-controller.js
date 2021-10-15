@@ -6,7 +6,7 @@ import { NegociacaoView } from "../views/negociacao-view.js";
 export class NegociacaoController {
     constructor() {
         this._negociacoes = new Negociacoes();
-        this._negociacoesView = new NegociacaoView("#table-negociacao");
+        this._negociacoesView = new NegociacaoView("#table-negociacao", true);
         this._view = new MessageView("#mensagemView");
         this._data = document.querySelector("#data");
         this._quantidade = document.querySelector("#quantidade");
@@ -14,7 +14,7 @@ export class NegociacaoController {
         this._negociacoesView.update(this._negociacoes);
     }
     adiciona() {
-        const negociacao = this.criaNegociacao();
+        const negociacao = Negociacao.criaDe(this._data.value, this._quantidade.value, this._valor.value);
         if (!this._ehDiaUtil(negociacao.data)) {
             this._view.update("Só é possível adicionar negociações em dias úteis.");
             return;
