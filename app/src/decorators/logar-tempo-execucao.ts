@@ -1,3 +1,5 @@
+// TODO: argumento para milisegundos ou segundos
+
 export function logarTempoExecucao() {
   return function (
     target: any,
@@ -6,8 +8,6 @@ export function logarTempoExecucao() {
   ) {
     let originalMethod = descriptor.value;
     descriptor.value = function (...args: any[]) {
-      console.log(this, target);
-
       const t1 = performance.now();
       const result = originalMethod.apply(this, args);
       const t2 = performance.now();
@@ -16,5 +16,7 @@ export function logarTempoExecucao() {
       );
       return result;
     };
+
+    return descriptor;
   };
 }

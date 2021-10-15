@@ -13,7 +13,7 @@ import { NegociacaoView } from "../views/negociacao-view.js";
 export class NegociacaoController {
     constructor() {
         this._negociacoes = new Negociacoes();
-        this._negociacoesView = new NegociacaoView("#table-negociacao", true);
+        this._negociacoesView = new NegociacaoView("#table-negociacao");
         this._view = new MessageView("#mensagemView");
         this._data = document.querySelector("#data");
         this._quantidade = document.querySelector("#quantidade");

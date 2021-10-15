@@ -1,3 +1,4 @@
+import { inspect } from "../decorators/inspect.js";
 import { logarTempoExecucao } from "../decorators/logar-tempo-execucao.js";
 import { DiasDaSemana } from "../enums/DiasDaSemana.js";
 import { Negociacao } from "../models/negociacao.js";
@@ -10,7 +11,7 @@ export class NegociacaoController {
   private _quantidade: HTMLInputElement;
   private _valor: HTMLInputElement;
   private _negociacoes = new Negociacoes();
-  private _negociacoesView = new NegociacaoView("#table-negociacao", true);
+  private _negociacoesView = new NegociacaoView("#table-negociacao");
   private _view = new MessageView("#mensagemView");
 
   constructor() {
