@@ -4,3 +4,4 @@ export class MessageView extends View {
         return `<p class="alert alert-info">${model}</p>`;
     }
 }
+//# sourceMappingURL=message-view.js.map

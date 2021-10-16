@@ -45,12 +45,24 @@ export class NegociacaoController {
     this._negociacoesService
       .importarNegociacoesDoDia()
       .then((negociacoesDoDia) => {
-        for (const negociacao of negociacoesDoDia) {
+        let negos = negociacoesDoDia.filter((negociacaoDeHoje) => {
+          return !this._negociacoes
+            .lista()
+            .some((negociacao) => negociacaoDeHoje.equal(negociacao));
+        });
+        return negos;
+      })
+      .then((negociacoes) => {
+        if (negociacoes.length == 0) {
+          this._view.update("Só é permitido importar uma vez por dia!");
+          return;
+        }
+        for (const negociacao of negociacoes) {
           this._negociacoes.adiciona(negociacao);
         }
-        this._negociacoesView.update(this._negociacoes);
+        this._updateAllView();
+        this._view.update("Importação realizada com sucesso!");
       });
-    this._view.update("Importação realizada com sucesso!");
   }
 
   private _ehDiaUtil(data: Date) {

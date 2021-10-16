@@ -4,6 +4,14 @@ export class Negociacao {
         this.quantidade = quantidade;
         this.valor = valor;
     }
+    toString() {
+        return `DATA: ${this._data} \t VALOR: ${this.valor} \t QUANTIDADE: ${this.quantidade}`;
+    }
+    equal(negociacao) {
+        return (negociacao.data.toJSON() == this.data.toJSON() &&
+            negociacao.quantidade == this.quantidade &&
+            negociacao.valor == this.valor);
+    }
     get data() {
         return new Date(this._data);
     }
@@ -18,3 +26,4 @@ export class Negociacao {
         return new Negociacao(date, quantidade, valor);
     }
 }
+//# sourceMappingURL=negociacao.js.map

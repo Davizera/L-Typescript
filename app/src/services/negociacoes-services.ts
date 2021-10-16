@@ -8,7 +8,11 @@ export class NegociacoesServices {
       .then((data: NegociacoesDoDia[]) => {
         return data.map(
           (negociacao) =>
-            new Negociacao(new Date(), negociacao.vezes, negociacao.montante)
+            new Negociacao(
+              new Date(2021, 10, 15),
+              negociacao.vezes,
+              negociacao.montante
+            )
         );
       });
   }
